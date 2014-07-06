@@ -1,11 +1,10 @@
 
-R = React.DOM
-
+{table, thead, tbody, tr, th, td, span, form, input, p , div} = React.DOM
 
 ProductCategoryRow = React.createClass
   render: ->
-    R.tr null, 
-      R.th colSpan: 2, this.props.category
+    tr null, 
+      th colSpan: 2, this.props.category
 
 ProductRow = React.createClass
   render: -> 
@@ -15,9 +14,9 @@ ProductRow = React.createClass
       name = R.span style: color:'red', this.props.product.name
 
     return(
-      R.tr( null, 
-        R.td null, name
-        R.td null, this.props.product.price)
+      tr( null, 
+        td null, name
+        td null, this.props.product.price)
     )
 
 
@@ -36,22 +35,22 @@ ProductTable = React.createClass
       rows.push ProductRow product: product, key: product.name
       lastCategory = product.category
     return (
-      R.table null, 
-        R.thead null,
-          R.tr( null, 
-            R.th null, 'Name'
-            R.th null, 'Price')
-        R.tbody null, rows
+      table null, 
+        thead null,
+          tr( null, 
+            th null, 'Name'
+            th null, 'Price')
+        tbody null, rows
       )
 
 
 SearchBar = React.createClass
   render: ->
     return (
-      R.form null,
-        R.input type:'text', placeholder: @props.filterText, onChange: @handleChange, ref: 'filterTextInput'
-        R.p null, 
-          R.input type: 'checkbox', value: @props.inStockOnly, onChange: @handleChange, ref: 'inStockOnlyInput', 'Only show products in stock'
+      form null,
+        input type:'text', placeholder: @props.filterText, onChange: @handleChange, ref: 'filterTextInput'
+        p null, 
+          input type: 'checkbox', value: @props.inStockOnly, onChange: @handleChange, ref: 'inStockOnlyInput', 'Only show products in stock'
     )
 
   handleChange: -> 
@@ -73,7 +72,7 @@ FilterableProductTable = React.createClass
 
   render: -> 
     return (
-      R.div null,
+      div null,
         SearchBar 
           filterText: @state.filterText,
           inStockOnly: @state.inStockOnly
@@ -92,12 +91,9 @@ PRODUCTS = [
   {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
   {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
   {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
-];
+]
 
 
 React.renderComponent FilterableProductTable(products: PRODUCTS), document.getElementById('content')
-
-
-
 
 
